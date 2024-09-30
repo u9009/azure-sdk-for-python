@@ -39,6 +39,7 @@ from azure.ai.ml._restclient.v2023_10_01 import AzureMachineLearningServices as 
 from azure.ai.ml._restclient.v2024_01_01_preview import AzureMachineLearningWorkspaces as ServiceClient012024Preview
 from azure.ai.ml._restclient.v2024_04_01_preview import AzureMachineLearningWorkspaces as ServiceClient042024Preview
 from azure.ai.ml._restclient.v2024_07_01_preview import AzureMachineLearningWorkspaces as ServiceClient072024Preview
+from azure.ai.ml._restclient.v2024_10_01_preview import AzureMachineLearningWorkspaces as ServiceClient102024Preview
 from azure.ai.ml._restclient.workspace_dataplane import (
     AzureMachineLearningWorkspaces as ServiceClientWorkspaceDataplane,
 )
@@ -376,6 +377,13 @@ class MLClient:
             **kwargs,
         )
 
+        self._service_client_10_2024_preview = ServiceClient102024Preview(
+            credential=self._credential,
+            subscription_id=self._operation_scope._subscription_id,
+            base_url=base_url,
+            **kwargs,
+        )
+
         # A general purpose, user-configurable pipeline for making
         # http requests
         self._requests_pipeline = HttpPipeline(**kwargs)
@@ -473,7 +481,7 @@ class MLClient:
 
         self._workspaces = WorkspaceOperations(
             self._ws_operation_scope if registry_reference else self._operation_scope,
-            self._service_client_07_2024_preview,
+            self._service_client_10_2024_preview,
             self._operation_container,
             self._credential,
             requests_pipeline=self._requests_pipeline,
@@ -483,7 +491,7 @@ class MLClient:
 
         self._workspace_outbound_rules = WorkspaceOutboundRuleOperations(
             self._operation_scope,
-            self._service_client_07_2024_preview,
+            self._service_client_10_2024_preview,
             self._operation_container,
             self._credential,
             **kwargs,
@@ -696,7 +704,7 @@ class MLClient:
 
         self._featurestores = FeatureStoreOperations(
             self._operation_scope,
-            self._service_client_07_2024_preview,
+            self._service_client_10_2024_preview,
             self._operation_container,
             self._credential,
         )
