@@ -32947,6 +32947,10 @@ class Workspace(Resource):
      list[~azure.mgmt.machinelearningservices.models.PrivateEndpointConnection]
     :ivar private_link_count: Count of private connections in the workspace.
     :vartype private_link_count: int
+    :ivar provision_network_now: Set to trigger the provisioning of the managed VNet with the
+     default Options when creating a Workspace with the managed VNet enabled, or else it does
+     nothing.
+    :vartype provision_network_now: bool
     :ivar provisioning_state: The current deployment state of workspace resource. The
      provisioningState is to indicate states for resource provisioning. Possible values include:
      "Unknown", "Updating", "Creating", "Deleting", "Succeeded", "Failed", "Canceled".
@@ -33047,6 +33051,7 @@ class Workspace(Resource):
         'primary_user_assigned_identity': {'key': 'properties.primaryUserAssignedIdentity', 'type': 'str'},
         'private_endpoint_connections': {'key': 'properties.privateEndpointConnections', 'type': '[PrivateEndpointConnection]'},
         'private_link_count': {'key': 'properties.privateLinkCount', 'type': 'int'},
+        'provision_network_now': {'key': 'properties.provisionNetworkNow', 'type': 'bool'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
         'public_network_access': {'key': 'properties.publicNetworkAccess', 'type': 'str'},
         'serverless_compute_settings': {'key': 'properties.serverlessComputeSettings', 'type': 'ServerlessComputeSettings'},
@@ -33096,6 +33101,7 @@ class Workspace(Resource):
         key_vaults: Optional[List[str]] = None,
         managed_network: Optional["ManagedNetworkSettings"] = None,
         primary_user_assigned_identity: Optional[str] = None,
+        provision_network_now: Optional[bool] = None,
         public_network_access: Optional[Union[str, "PublicNetworkAccessType"]] = None,
         serverless_compute_settings: Optional["ServerlessComputeSettings"] = None,
         service_managed_resources_settings: Optional["ServiceManagedResourcesSettings"] = None,
@@ -33178,6 +33184,10 @@ class Workspace(Resource):
         :keyword primary_user_assigned_identity: The user assigned identity resource id that represents
          the workspace identity.
         :paramtype primary_user_assigned_identity: str
+        :keyword provision_network_now: Set to trigger the provisioning of the managed VNet with the
+         default Options when creating a Workspace with the managed VNet enabled, or else it does
+         nothing.
+        :paramtype provision_network_now: bool
         :keyword public_network_access: Whether requests from Public Network are allowed. Possible
          values include: "Enabled", "Disabled".
         :paramtype public_network_access: str or
@@ -33243,6 +33253,7 @@ class Workspace(Resource):
         self.primary_user_assigned_identity = primary_user_assigned_identity
         self.private_endpoint_connections = None
         self.private_link_count = None
+        self.provision_network_now = provision_network_now
         self.provisioning_state = None
         self.public_network_access = public_network_access
         self.serverless_compute_settings = serverless_compute_settings

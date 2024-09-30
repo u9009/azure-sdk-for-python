@@ -4,6 +4,7 @@
 
 ### Features Added
   - Cross subscription storage account support for workspace and feature store. Developer can provide a storage account from another subscription while creating a workspace or storage account.
+  - Added Workspace property `ProvisionNetworkNow` to trigger the provisioning of the managed VNet with the default Options when creating a Workspace with the managed VNet enabled, or else it does nothing.
 
 ### Bugs Fixed
   - #35820 - using compute location attribute to fill compute location to align the experience with UI.
